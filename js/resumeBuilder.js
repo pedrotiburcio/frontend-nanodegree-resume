@@ -10,7 +10,7 @@ var bio = {
     "welcomeMessage": "Seja bem vindo à minha página de currículo online! ",
     "biopic": "./images/pedro.jpg",
     "skills": ["Trabalho em Equipe", "Liderança", "Pró-Atividade", "Aprendizado rápido"]
-}
+};
 
 bio.display = function() {
     var formattedName = HTMLheaderName.replace("%data%", bio.name);
@@ -35,7 +35,7 @@ bio.display = function() {
         var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
         $("#skills").append(formattedSkill);
     }
-}
+};
 
 bio.display();
 
@@ -62,10 +62,10 @@ var work = {
             "description": "Exerce atividades de desenvolvimento avançadas, em nível Sênior."
         }
     ]
-}
+};
 
 work.display = function displayWork() {
-    for (job in work.jobs) {
+    for (var job = 0; job < work.jobs.length; job++) {
         $("#workExperience").append(HTMLworkStart);
         var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
         var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
@@ -75,52 +75,55 @@ work.display = function displayWork() {
         var formattedWork = formattedEmployer + formattedTitle + formattedDates + formattedLocation + formattedDescription;
         $(".work-entry:last").append(formattedWork);
     }
-}
+};
 
 work.display();
 
 var projects = {
-    "web": [{
+    "projects": [{
             "title": "Definindo a Mentalidade de um Desenvolvedor Web",
             "dates": "Março/2017",
-            "description": "Em Mentalidade de Desenvolvedor, você conhecerá a história das linguagens que serão estudadas, da Web e da nossa posição atual como desenvolvedores Web em um cenário em evolução. Depois de aprender sobre as estratégias de resolução de problemas, você vai escrever uma carta para o seu próprio futuro, descrevendo como você pode superar qualquer desafio à frente neste Nanodegree, e definir algumas metas em relação àquilo que deseja alcançar.",
-            "images": "images/projeto-mentalidade-desenvolvedor.jpg"
+            "description": "Em Mentalidade de Desenvolvedor, você conhecerá a história das linguagens que serão estudadas, da web e da nossa posição atual como desenvolvedores web em um cenário em evolução. Depois de aprender sobre as estratégias de resolução de problemas, você vai escrever uma carta para o seu próprio futuro, descrevendo como você pode superar qualquer desafio à frente neste Nanodegree, e definir algumas metas em relação àquilo que deseja alcançar.",
+            "images": ["images/projeto-mentalidade-desenvolvedor.jpg"]
         },
         {
             "title": "MockUp ao Artigo",
             "dates": "Abril/2017",
             "description": "Pratique a sintaxe HTML convertendo um mockup de um artigo de blog em um site real.",
-            "images": "images/projeto-mockup-to-article.gif"
+            "images": ["images/projeto-mockup-to-article.gif"]
         },
         {
             "title": "Figurinhas de Animais",
             "dates": "Abril/2017",
             "description": "Com um título simples, 'Figurinhas de Animais', este projeto combina as habilidades que você dominou na série de problemas e pede para você recriar uma página web a partir de um protótipo de design.",
-            "images": "images/projeto-fig-animais.jpg"
+            "images": ["images/projeto-fig-animais.jpg"]
         },
         {
             "title": "Criar um Site de Portfólio",
             "dates": "Maio/2017",
             "description": "Você receberá um mockup de design em PDF e deverá replicar esse design em HTML e CSS. Você desenvolverá um site responsivo que exibirá imagens, descrições e links para cada projeto do portfólio que você concluirá durante o Nanodegree Desenvolvedor Web Front-End .",
-            "images": "images/projeto-portfolio.png"
+            "images": ["images/projeto-portfolio.png"]
         }
     ]
-}
+};
 
 projects.display = function() {
-    for (project in projects.web) {
+    for (var project = 0; project < projects.projects.length; project++) {
         $("#projects").append(HTMLprojectStart);
-        var formattedTitle = HTMLprojectTitle.replace("%data%", projects.web[project].title);
-        var formattedDate = HTMLprojectDates.replace("%data%", projects.web[project].dates);
-        var formattedDescription = HTMLprojectDescription.replace("%data%", projects.web[project].description);
-        var formattedImage = HTMLprojectImage.replace("%data%", projects.web[project].images);
-        var formattedProject = formattedTitle + formattedDate + formattedDescription + formattedImage;
+        var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+        var formattedDate = HTMLprojectDates.replace("%data%", projects.projects[project].dates);
+        var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description);
+        var formattedProject = formattedTitle + formattedDate + formattedDescription;
         $(".project-entry:last").append(formattedProject);
+
+        for(var i = 0; i < projects.projects[project].images.length; i++){
+            var formattedImage = HTMLprojectImage.replace("%data%", projects.projects[project].images[i]);
+            $(".project-entry:last").append(formattedImage);
+        }
     }
-}
+};
 
 projects.display();
-
 var education = {
     "schools": [{
             "name": "UFCG",
@@ -134,7 +137,7 @@ var education = {
             "name": "CCAA",
             "location": "Campina Grande",
             "degree": "Nível Básico e Intermediário",
-            "majors": "Teen Course",
+            "majors": ["Teen Course"],
             "dates": "2009 - 2011",
             "url": "http://www.ccaa.com.br/"
         }
@@ -143,39 +146,45 @@ var education = {
         "title": "Desenvolvedor Web Front-End",
         "school": "Udacity",
         "dates": "2017",
-        "url": "https://br.udacity.com/course/front-end-web-developer-nanodegree--nd001/"
+        "url": "https://br.udacity.com/course/front-end-projects-developer-nanodegree--nd001/"
     }]
-}
+};
 
 education.display = function() {
-    for (school in education.schools) {
+    var formattedSchool;
+    for (var school = 0; school < education.schools.length; school++) {
         $("#education").append(HTMLschoolStart);
         var formattedName = HTMLschoolName.replace("%data%", education.schools[school].name);
         var formattedLocation = HTMLschoolLocation.replace("%data%", education.schools[school].location);
         var formattedDegree = HTMLschoolDegree.replace("%data%", education.schools[school].degree);
-        var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors);
         var formattedDate = HTMLschoolDates.replace("%data%", education.schools[school].dates);
-        var formattedSchool = formattedName + formattedDegree + formattedDate + formattedLocation + formattedMajor;
+        formattedSchool = formattedName + formattedDegree + formattedDate + formattedLocation;
         $(".education-entry:last").append(formattedSchool);
+
+        for(var i = 0; i < education.schools[school].majors.length; i++){
+            var formattedMajor = HTMLschoolMajor.replace("%data%", education.schools[school].majors[i]);
+            $(".education-entry:last").append(formattedMajor);
+        }
     }
 
     $("#education").append(HTMLonlineClasses);
 
-    for (course in education.onlineCourses) {
+    for (var course = 0; course < education.onlineCourses.length; course++) {
         $("#education").append(HTMLschoolStart);
         var formattedTitle = HTMLonlineTitle.replace("%data%", education.onlineCourses[course].title);
-        var formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school);
+        formattedSchool = HTMLonlineSchool.replace("%data%", education.onlineCourses[course].school);
         var formattedDates = HTMLonlineDates.replace("%data%", education.onlineCourses[course].dates);
         var formattedUrl = HTMLonlineURL.replace("%data%", education.onlineCourses[course].url);
         var formattedOnlineCourses = formattedTitle + formattedSchool + formattedDates + formattedUrl;
         $(".education-entry:last").append(formattedOnlineCourses);
     }
-}
+};
 
 education.display();
 
 $("#mapDiv").append(googleMap);
-/* function inName(name) {
+
+function inName(name) {
     name = name.trim().split(" ");
     console.log(name);
     name[0] = name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
@@ -183,4 +192,4 @@ $("#mapDiv").append(googleMap);
     return name[0] + " " + name[1];
 }
 
-$("#main").append(internationalizeButton); */
+$("#header").append(internationalizeButton);
